@@ -1,13 +1,13 @@
 <template>
     <div class="cart" :data-cart="this.$props.category">
-        <div class="discount">{{ this.$props.item.discountPercentage }}%</div>
-        <div class="cart_raiting">{{ this.$props.item.rating }}</div>
+        <div class="discount">{{ item.discountPercentage }}%</div>
+        <div class="cart_raiting">{{ item.rating }}</div>
         <img
             class="cart_img"
             loading="lazy" 
-            :src="this.$props.item.images[0]">
-        <div class="cart_title">{{ this.$props.item.title }}</div>
-        <div class="cart_price">{{ this.$props.item.price }}$</div>
+            :src="item.images[0]">
+        <div class="cart_title">{{ item.title }}</div>
+        <div class="cart_price">{{ item.price }}$</div>
     </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .discount{
     position: absolute;
     color: #fff;

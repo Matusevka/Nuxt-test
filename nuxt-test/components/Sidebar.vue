@@ -2,7 +2,8 @@
     <div class="sidebar">
         <div class="sidebar_title">Catalog</div>
         <div class="sidebar_list">
-            <div class="sidebar_item" v-for="item in items" :key="item" @click="SelectCat(item)">{{ item }}</div>
+            <div class="sidebar_item" @click="SelectCat('all')">All categories</div>
+            <div class="sidebar_item" v-for="item in items" :key="item" @click="SelectCat(item)"><nuxt-link :to="`/`">{{ item }}</nuxt-link></div>
         </div>
     </div>
 </template>
@@ -22,9 +23,14 @@ export default {
     methods:{
 
         SelectCat(cat){
-            this.$parent.$children[2].$children[0].items = this.origItems
-            this.$parent.$children[2].$children[0].items = this.$parent.$children[2].$children[0].items.filter(e => e.category === cat)
+            this.$emit('usedcat', cat)
+            console.log(cat)
         }
+
+        //SelectCat(cat){
+        //    this.$parent.$children[2].$children[0].items = this.origItems
+        //    this.$parent.$children[2].$children[0].items = this.$parent.$children[2].$children[0].items.filter(e => e.category === cat)
+        //}
     },
     mounted(){
         axios.get('https://dummyjson.com/products/categories')
@@ -42,7 +48,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .sidebar{
     position: fixed;
     left: 0px;

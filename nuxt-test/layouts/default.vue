@@ -2,21 +2,26 @@
 <template>
     <div>
         <Header />
-        <Sidebar />
+        <Sidebar @usedcat="UsedCat" />
         <nuxt />
     </div>
 </template>
   
 <script>
 
-import Header from '../components/Header.vue'
-import Sidebar from '../components/Sidebar.vue'
+import Header from '../components/Header.vue';
+import Sidebar from '../components/Sidebar.vue';
 
 export default {
-components: {
-    Header,
-    Sidebar
-}
+    components: {
+        Header,
+        Sidebar
+    },
+    methods: {
+        UsedCat(data){
+            this.$emit('usedcat', data)
+        }
+    }
 }
 </script>
 

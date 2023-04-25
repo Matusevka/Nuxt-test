@@ -56,7 +56,7 @@ export default {
 } 
 </script>
 
-<style>
+<style scoped>
 .founded{
     position: absolute;
     border-radius: 0 0 28px 28px;

@@ -1,26 +1,26 @@
 <template>
-    <div class="container">
+    <div class="container">  
         <div class="prod">
             <div class="left_column">
                 <img class="photo"
                     loading="lazy" 
-                    :src="img[0]">
+                    :src="product.thumbnail">
             </div>
 
             <div class="right_column">
                 <div class="product_description">
-                    <span>{{cat}}</span>
-                    <h1>{{ title }}</h1>
+                    <span>{{product.category}}</span>
+                    <h1>{{ product.title }}</h1>
 
-                    {{ description }}
+                    {{ product.description }}
                     <div class="manufacture">
                         <h2>Manufacturer:</h2>
-                        <span>{{ manufacturer }}</span>
+                        <span>{{ product.brand }}</span>
                     </div>
                     
-                    <div class="product-price"><span>{{price}}$</span> <a class="cart-btn" href="">Add to cart</a></div>
+                    <div class="product-price"><span>{{product.price}}$</span> <button class="cart-btn" href="">Add to cart</button></div>
                     Stock:
-                    {{ stock }}
+                    {{ product.stock }}
                 </div>
             </div>
         </div>
@@ -39,38 +39,19 @@ export default({
     data: function(){
         return{
             product: [],
-            title: '',
-            img: [],
-            price: '',
-            description: '',
-            discount: '',
-            cat: '',
-            stock: '',
-            manufacturer: ''
         };
     },
     mounted(){
-        axios.get('https://dummyjson.com/products')
+        axios.get('https://dummyjson.com/products/'+ this.$route.params.id)
         .then(res => {
-            this.product = res.data.products.filter(e => e.id == this.$route.params.id)
-            this.product = this.product[0]
-
-
-            this.title = this.product.title
-            this.img = this.product.images
-            this.price = this.product.price
-            this.description = this.product.description
-            this.discount = this.product.discountPercentage
-            this.cat = this.product.category
-            this.stock = this.product.stock
-            this.manufacturer = this.product.brand
-            
+          this.product = res.data
+          console.log(this.product)
         })
     }
 })
 </script>
 
-<style>
+<style scoped>
 .product_description {
   border-bottom: 1px solid silver;
   margin-bottom: 20px;
@@ -146,8 +127,11 @@ p {
   text-decoration: none;
   padding: 12px 30px;
   transition: all .5s;
+  border: 1px solid silver
 }
 .cart-btn:hover {
   background-color: #64af3d;
 }
 </style>
+
+//нужно понять почему нельзя перейти на категорию из этого
